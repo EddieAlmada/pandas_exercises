@@ -217,3 +217,49 @@ df
 
 ######################################## Exploratory Data Analysis ###################################
 
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(r'C:\Users\almad\Documents\repos\pandas_exercises\world_population.csv')
+
+df
+
+pd.set_option('display.float_format', lambda x: '%.2f' % x)
+
+df.info()
+df.describe()
+
+df.isnull().sum()
+
+df.nunique()
+
+df.sort_values(by = '2022 Population', ascending = False).head(10)
+
+df.corr()
+sns.heatmap(df.corr(), annot = True)
+plt.rcParams['figure.figsize'] = (15,7)
+plt.show()
+
+df2 = df.groupby('Continent')['1970 Population', '1980 Population',
+       '1990 Population', '2000 Population', '2010 Population',
+       '2015 Population', '2020 Population', '2022 Population'].mean().sort_values(by = '2022 Population', ascending = False)
+
+df[df['Continent'].str.contains("Oceania")]
+
+df2.plot()
+plt.show()
+
+df.columns
+
+df3 = df2.transpose()
+df3.plot()
+
+
+
+df.boxplot()
+
+plt.show()
+
+df.dtypes
+df.select_dtypes(include = 'number')
